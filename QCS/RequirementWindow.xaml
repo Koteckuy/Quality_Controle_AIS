@@ -1,0 +1,160 @@
+﻿<Window x:Class="QCS.RequirementWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:QCS"
+        mc:Ignorable="d"
+        Title="Нормы" Height="450" Width="800"
+        WindowStyle="None"
+        ResizeMode="NoResize"
+        xmlns:ui="http://schemas.modernwpf.com/2019"
+        ui:WindowHelper.UseModernWindowStyle="True" WindowStartupLocation="CenterScreen" KeyDown="Window_KeyDown">
+
+    <Window.Resources>
+        <CollectionViewSource
+            x:Key="cvs"
+            Source="{Binding}" />
+        <local:AppThemeConverter x:Key="AppThemeConverter" />
+    </Window.Resources>
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="30"/>
+            <RowDefinition/>
+            <RowDefinition Height="50"/>
+        </Grid.RowDefinitions>
+
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition Width="266.4"/>
+        </Grid.ColumnDefinitions>
+
+        <Menu 
+            Height="30" Margin="0,0,0.2,0.4">
+            <MenuItem Header="Норма" Height="30" FontSize="10">
+                <MenuItem Header="Изменить" FontSize="10" Click="EditButtonClick"/>
+                <MenuItem Header="Добавить" FontSize="10" Click="AddButton_Click"/>
+                <MenuItem Header="Отменить" FontSize="10" Click="CanselButton_Click"/>
+
+            </MenuItem>
+            <MenuItem Header="Действия" FontSize="10" Height="30">
+            </MenuItem>
+            <MenuItem Header="Настройки" FontSize="10" Height="30">
+                <MenuItem Header="Тема" FontSize="10">
+                    <ui:RadioButtons
+                        SelectedItem="{Binding Source={x:Static local:ThemeManagerProxy.Current}, Path=ApplicationTheme, Converter={StaticResource AppThemeConverter}}">
+                        <ui:RadioButtons.ItemsSource>
+                            <local:AppThemes/>
+                        </ui:RadioButtons.ItemsSource>
+                    </ui:RadioButtons>
+                </MenuItem>
+            </MenuItem>
+        </Menu>
+
+        <DataGrid
+            Name="NormGrid"
+            Grid.Row="1" 
+            Grid.Column="0"
+            Margin="10,10,10,10"
+            HeadersVisibility="Column"
+            SelectionMode="Single"
+            IsReadOnly="True"
+            BorderThickness="1"
+            BorderBrush="#868686"
+            GridLinesVisibility="None" SelectionChanged="NormGrid_SelectionChanged" Loaded="NormGrid_Loaded">
+            <DataGrid.Columns>
+                <DataGridTextColumn 
+                    Header="Продукция"
+                    Width="0.4*"
+                    Binding="{Binding Product.PName}"
+                    CanUserResize="False"/>
+                <DataGridTextColumn 
+                    Header="Требование" 
+                    Width="0.4*"
+                    Binding="{Binding Requirement.RName}"
+                    CanUserResize="False"/>
+                <DataGridTextColumn 
+                    Header="Норма" 
+                    Width="0.2*"
+                    Binding="{Binding NValue}"
+                    CanUserResize="False"/>
+            </DataGrid.Columns>
+        </DataGrid>
+
+        <StackPanel 
+            Grid.Column="2"  
+            Grid.Row="1" 
+            Margin="10,10,10,10" Grid.RowSpan="2">
+
+            <ComboBox 
+                ui:ControlHelper.Header="Предмет проверки:" 
+                ui:ControlHelper.PlaceholderText="Выберите продукцию..."
+                Name="ProductsComboBox" 
+                ToolTip="Продукция, к которой предъявляется требование"
+                FontSize="12" 
+                HorizontalAlignment="Stretch" 
+                Margin="0,0,0,10" 
+                SelectionChanged="ProductsComboBox_SelectionChanged"/>
+
+            <ComboBox 
+                ui:ControlHelper.Header="Требование:"
+                ui:ControlHelper.PlaceholderText="Выберите требование..."
+                Name="RequirementComboBox" 
+                ToolTip="Требование, предъявляемое к продукции"
+                FontSize="12" 
+                HorizontalAlignment="Stretch" 
+                Margin="0,0,0,10" 
+                SelectionChanged="RequirementComboBox_SelectionChanged"/>
+
+
+            <TextBox
+                Name="NValueTextBox"
+                ToolTip="Значение требования по умолчанию"
+                ui:ControlHelper.PlaceholderText="Введите значение..."
+                ui:ControlHelper.Header="Норма:"
+                Margin="0,0,0,10" 
+                FontSize="12" 
+                TextChanged="TextBox_TextChanged"
+                PreviewMouseDown="TValueTextBox_PreviewMouseDown"/>
+
+            <Button 
+            Content="Добавить" 
+            Name="AddButton"
+            FontSize="12" 
+            Click="AddButton_Click" HorizontalAlignment="Stretch"/>
+        </StackPanel>
+
+
+        <Button 
+            Content="Отменить" 
+            Name="CanselButton"
+            Margin="10.4,0,0,9.6"
+            Grid.Row="2"
+            Grid.Column="2" 
+            VerticalAlignment="Bottom" 
+            FontSize="12" Click="CanselButton_Click"/>
+
+        <Button 
+            Content="Удалить" 
+            Name="DeleteButton"
+            Margin="0,0,0,10"
+            Grid.Row="2"
+            Grid.Column="2"
+            VerticalAlignment="Bottom"
+            HorizontalAlignment="Center" 
+            FontSize="12" Click="DeleteButton_Click"/>
+
+        <Button 
+            Content="Изменить" 
+            Name="SaveButton"
+            Margin="0,0,10,9.6"
+            Grid.Row="2"
+            Grid.Column="2" 
+            HorizontalAlignment="Right" 
+            VerticalAlignment="Bottom" 
+            FontSize="12" 
+            Click="EditButtonClick"/>
+
+    </Grid>
+</Window>

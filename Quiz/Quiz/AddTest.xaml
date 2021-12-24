@@ -1,0 +1,160 @@
+﻿<Window x:Class="Quiz.AddTest"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Quiz"
+        mc:Ignorable="d"
+        Title="AddTest" Height="800" Width="800" WindowStartupLocation="CenterScreen" Background="#AA999999">
+    <Grid Name="addTestForm" Background="Black">
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition Height="0.7*"/>
+            <RowDefinition/>
+            <RowDefinition Height="1.5*"/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition Height="4*"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+
+
+        <TextBlock Grid.Row="0" Grid.ColumnSpan="3" 
+                   Text="Добавление теста" 
+                   Foreground="White"
+                   FontSize="25"
+                   VerticalAlignment="Center"
+                   HorizontalAlignment="Center"/>
+
+        <TextBlock Grid.Row="1" Grid.Column="0" 
+                   Text="Тип теста" 
+                   FontSize="25" 
+                   VerticalAlignment="Center" 
+                   HorizontalAlignment="Left" 
+                   Foreground="White"
+                   Margin="20 0"/>
+        <RadioButton Grid.Row="1" Grid.Column="1" 
+                     Name="testTypeSimple"
+                     Content="Простой тест"
+                     HorizontalAlignment="Center" 
+                     FontSize="20"
+                     Background="White"
+                     Foreground="White"
+                     IsChecked="True">
+        </RadioButton>
+        <RadioButton Grid.Row="1" Grid.Column="2" 
+                     Name="testTypeBlitz" 
+                     Content="Блиц тест" 
+                     HorizontalAlignment="Center" 
+                     FontSize="20"
+                     Background="White"
+                     Foreground="White">
+        </RadioButton>
+
+        <TextBlock Grid.Row="2"
+                   Text="Название теста" 
+                   FontSize="25" 
+                   VerticalAlignment="Center" 
+                   HorizontalAlignment="Left"
+                   Foreground="White"
+                   Margin="20 0"/>
+
+        <TextBox Grid.Row="3" Grid.ColumnSpan="3" 
+                 Name="testName" 
+                 Foreground="White"
+                 Background="#AA999999"
+                 Height="35"
+                 FontSize="20"
+                 Margin="10 0"/>
+
+        <TextBlock Grid.Row="4" 
+                   Text="Описание" 
+                   FontSize="25" 
+                   VerticalAlignment="Center" 
+                   HorizontalAlignment="Left" 
+                   Foreground="White"
+                   Margin="20 0"/>
+
+        <TextBox Grid.Row="5" Grid.ColumnSpan="3" 
+                 Name="testDescription" 
+                 Foreground="White"
+                 Background="#AA999999"
+                 FontSize="20"
+                 Margin="10 0"
+                 TextWrapping="Wrap"/>
+
+        <Button x:Name="saveTestButton" 
+                Grid.Row="6" Grid.ColumnSpan="3" 
+                Height="40"
+                Width="200"
+                Margin="20 5"
+                Background="#4d787878"
+                BorderBrush="#99FFFFFF"
+                FontSize="18"
+                Content="Добавить" 
+                Click="saveTestButton_Click" Foreground="White"/>
+
+        <TextBlock Grid.Row="7" 
+                   Text="Вопросы" 
+                   FontSize="25" 
+                   VerticalAlignment="Center" 
+                   HorizontalAlignment="Left" 
+                   Foreground="White"
+                   Margin="20 0"/>
+
+        <ScrollViewer VerticalScrollBarVisibility="Auto"
+                  Grid.Row="8" Grid.ColumnSpan="3"
+                  Margin="20 10"
+                  Background="#AA999999"
+                  FontSize="20"
+                  Padding="5">
+            <ListBox Name="questionList"
+                     Foreground="White" 
+                     Background="#AA999999">
+            </ListBox>
+        </ScrollViewer>
+
+        <Button Name="deleteQuestionButton" 
+                Grid.Row="9" Grid.ColumnSpan="1" 
+                Height="40"
+                Width="200"
+                Margin="20 5"
+                Background="#4d787878"
+                BorderBrush="#99FFFFFF"
+                FontSize="18"
+                Content="Удалить" 
+                Click="deleteQuestionButton_Click" 
+                Foreground="White"/>
+        
+        <Button Name="editQuestionButton" 
+                Grid.Row="9" Grid.ColumnSpan="3" 
+                Height="40"
+                Width="200"
+                Margin="20 5"
+                Background="#4d787878"
+                BorderBrush="#99FFFFFF"
+                FontSize="18"
+                Content="Редактировать" 
+                Click="editQuestionButton_Click" 
+                Foreground="White"/>
+        
+        <Button Name="addQuestionButton"
+                Grid.Row="9" Grid.Column="2" 
+                Height="40"
+                Width="200"
+                Margin="20 5"
+                Background="#4d787878"
+                BorderBrush="#99FFFFFF"
+                FontSize="18"
+                Content="Добавить" 
+                Click="addTestButton_Click" Foreground="White"/>
+        
+    </Grid>
+</Window>

@@ -1,0 +1,149 @@
+﻿<Window x:Class="QCS.HistoryWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:QCS"
+        mc:Ignorable="d"
+        Title="История" Height="450" Width="800"
+        WindowStyle="None"
+        ResizeMode="NoResize"
+        xmlns:ui="http://schemas.modernwpf.com/2019"
+        ui:WindowHelper.UseModernWindowStyle="True" WindowStartupLocation="CenterScreen">
+
+    <Window.Resources>
+        <CollectionViewSource
+            x:Key="cvs"
+            Source="{Binding}" />
+        <local:AppThemeConverter x:Key="AppThemeConverter" />
+    </Window.Resources>
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="30"/>
+            <RowDefinition/>
+            <RowDefinition Height="50"/>
+        </Grid.RowDefinitions>
+
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition Width="266.4"/>
+        </Grid.ColumnDefinitions>
+
+        <Menu 
+            Height="30" Margin="0,0,0.2,0.4">
+            <MenuItem Header="Тест" Height="30" FontSize="10">
+                <MenuItem Header="Редактировать" FontSize="10" Click="EditButtonClick"/>
+                <MenuItem Header="Удалить" FontSize="10" Click="DeleteButtonClick"/>
+                <MenuItem Header="Отменить" FontSize="10" Click="CanselButtonClick"/>
+            </MenuItem>
+            <MenuItem Header="Действия" FontSize="10" Height="30">
+                <MenuItem Header="Печать" FontSize="10">
+                    <MenuItem Header="Сертификат соответствия/Акт выбраковки" FontSize="10" Click="PrintButtonClick"/>
+                    <MenuItem Header="Таблицу тестов" FontSize="10" Click="ExcelButtonClick"/>
+                </MenuItem>
+                <MenuItem Header="Добавить норму" FontSize="10" Click="AddNorm_Click"/>
+            </MenuItem>
+            <MenuItem Header="Настройки" FontSize="10" Height="30">
+                <MenuItem Header="Тема" FontSize="10">
+                    <ui:RadioButtons
+                        SelectedItem="{Binding Source={x:Static local:ThemeManagerProxy.Current}, Path=ApplicationTheme, Converter={StaticResource AppThemeConverter}}">
+                        <ui:RadioButtons.ItemsSource>
+                            <local:AppThemes/>
+                        </ui:RadioButtons.ItemsSource>
+                    </ui:RadioButtons>
+                </MenuItem>
+            </MenuItem>
+        </Menu>
+
+        <DataGrid
+            Name="HistoryGrid"
+            Grid.Row="1" 
+            Grid.Column="0"
+            Margin="10,10,10,10"
+            HeadersVisibility="Column"
+            SelectionMode="Extended"
+            IsReadOnly="True"
+            BorderThickness="1"
+            BorderBrush="#868686"
+            GridLinesVisibility="None" Loaded="HistoryGrid_Loaded" SelectionChanged="HistoryGrid_SelectionChanged">
+            <DataGrid.Columns>
+                <DataGridTextColumn 
+                    Header="Продукция" 
+                    Binding="{Binding Product.PName}"
+                    CanUserResize="False"/>
+                <DataGridTextColumn 
+                    Header="Партия" 
+                    Binding="{Binding BatchID}"
+                    CanUserResize="False"/>
+                <DataGridTextColumn 
+                    Header="Требование" 
+                    Binding="{Binding Requirement.RName}"
+                    CanUserResize="False"/>
+                <DataGridTextColumn 
+                    Header="Норма" 
+                    Binding="{Binding Norm.NValue}"
+                    CanUserResize="False"/>
+                <DataGridTextColumn 
+                    Header="Замер"
+                    Binding="{Binding TValue}"
+                    CanUserResize="False"/>
+                <DataGridTextColumn 
+                    Header="Дата" 
+                    Binding="{Binding TestDate, StringFormat=\{0:dd.MM.yy\}}"
+                    CanUserResize="False"/>
+                <DataGridTextColumn 
+                    Header="Результат" 
+                    Binding="{Binding Result}"
+                    CanUserResize="False"/>
+            </DataGrid.Columns>
+        </DataGrid>
+
+        <StackPanel 
+            Grid.Column="1"  
+            Grid.Row="1" 
+            Margin="10.,10,10,10">
+
+            <TextBox
+                Name="FilterBox"
+                ToolTip="Сокрытие проверок, наименование продукции которых не соответствует введённому"
+                ui:ControlHelper.Header="Фильтрация:"
+                ui:ControlHelper.PlaceholderText="Введите текст..."
+                Margin="0,0,0,10" 
+                FontSize="12" TextChanged="FilterBoxTextChanged"/>
+
+            <TextBox
+                Name="SearchBox"
+                ToolTip="Выделение проверок, наименование продукции которых соответствует введённому"
+                ui:ControlHelper.Header="Поиск:"
+                ui:ControlHelper.PlaceholderText="Введите текст..."
+                Margin="0,0,0,10" 
+                FontSize="12" TextChanged="SearchBoxTextChanged"/>
+
+            <Button 
+                FontSize="12" 
+                Content="Построить диаграмму" 
+                HorizontalAlignment="Stretch"
+                Margin="0,0,0,10" Click="Button_Click" />
+
+        </StackPanel>
+
+        <Button 
+            Content="Отменить" 
+            Margin="10,0,0,10"
+            Grid.Row="2"
+            Grid.Column="2" VerticalAlignment="Bottom" FontSize="12" Click="CanselButtonClick"/>
+
+        <Button 
+            Content="Удалить" 
+            Grid.Row="2"
+            Margin="0,0,26,10"
+            Grid.Column="2" HorizontalAlignment="Center" VerticalAlignment="Bottom" FontSize="12" Click="DeleteButtonClick"/>
+
+        <Button 
+            Content="Редактировать" 
+            Margin="0,0,10,10"
+            Grid.Row="2"
+            Grid.Column="2" HorizontalAlignment="Right" VerticalAlignment="Bottom" FontSize="12" Click="EditButtonClick"/>
+    </Grid>
+</Window>

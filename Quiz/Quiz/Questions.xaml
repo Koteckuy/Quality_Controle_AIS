@@ -1,0 +1,152 @@
+﻿<Window x:Class="Quiz.Questions"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Quiz"
+        mc:Ignorable="d"
+        Title="Questions" Height="600" Width="800" WindowStartupLocation="CenterScreen" Background="Black">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition Height="3*"/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+
+        <TextBlock
+            Text="Добавление вопроса"
+            Foreground="White"
+            FontSize="25"
+            VerticalAlignment="Center"
+            HorizontalAlignment="Center" 
+            Grid.Column="1"
+            Grid.Row="0"/>
+
+        <TextBlock Grid.Row="1" 
+                   Text="Текст вопроса"
+                   FontSize="25"
+                   Foreground="White"
+                   VerticalAlignment="Center" 
+                   HorizontalAlignment="Left" 
+                   Margin="20 0"/>
+
+        <TextBox Grid.Row="2" Grid.ColumnSpan="3" 
+                 Name="questionText" 
+                 Foreground="White"
+                 Background="#AA999999"
+                 FontSize="20"
+                 Margin="10"
+                 TextWrapping="Wrap"/>
+        <TextBlock Grid.Row="3" Grid.Column="0" 
+                   Text="Варианты ответов" 
+                   FontSize="25"
+                   Foreground="White"
+                   VerticalAlignment="Center" 
+                   HorizontalAlignment="Left" 
+                   Margin="20 0"/>
+        <TextBlock Grid.Row="3" Grid.Column="3" 
+                   Text="Правильный" 
+                   FontSize="25"
+                   Foreground="White"
+                   VerticalAlignment="Center" 
+                   HorizontalAlignment="Center"/>
+
+        <TextBox x:Name="answerText1"
+                 Grid.Row="4" Grid.ColumnSpan="2"
+                 Foreground="White"
+                 Background="#AA999999"
+                 Height="35"
+                 FontSize="20"
+                 Margin="10 0">
+        </TextBox>
+        <CheckBox Grid.Row="4" Grid.Column="3"
+                  Name="answerCorrectness1"
+                  HorizontalAlignment="Center"
+                  VerticalAlignment="Center"
+                  Background="White">
+            <CheckBox.Resources>
+                <SolidColorBrush x:Key="MaterialDesignCheckBoxOff" Color="White"/>
+            </CheckBox.Resources>
+        </CheckBox>
+
+        <TextBox x:Name="answerText2"
+                 Grid.Row="5" Grid.ColumnSpan="2"
+                 Foreground="White"
+                 Background="#AA999999"
+                 Height="35"
+                 FontSize="20"
+                 Margin="10 0">
+        </TextBox>
+        <CheckBox Grid.Row="5" Grid.Column="3"
+                  Name="answerCorrectness2"
+                  HorizontalAlignment="Center"
+                  VerticalAlignment="Center"
+                  Background="White">
+            <CheckBox.Resources>
+                <SolidColorBrush x:Key="MaterialDesignCheckBoxOff" Color="White"/>
+            </CheckBox.Resources>
+        </CheckBox>
+
+        <TextBox x:Name="answerText3"
+                 Grid.Row="6" Grid.ColumnSpan="2"
+                 Foreground="White"
+                 Background="#AA999999"
+                 Height="35"
+                 FontSize="20"
+                 Margin="10 0">
+            <TextBox.Resources>
+                <SolidColorBrush x:Key="MaterialDesignTextBoxOn" Color="White"/>
+            </TextBox.Resources>
+        </TextBox>
+        <CheckBox Grid.Row="6" Grid.Column="3"
+                  Name="answerCorrectness3"
+                  HorizontalAlignment="Center"
+                  VerticalAlignment="Center"
+                  Background="White">
+            <CheckBox.Resources>
+                <SolidColorBrush x:Key="MaterialDesignCheckBoxOff" Color="White"/>
+            </CheckBox.Resources>
+        </CheckBox>
+
+        <TextBox x:Name="answerText4"
+                 Grid.Row="7" Grid.ColumnSpan="2"
+                 Foreground="White"
+                 Background="#AA999999"
+                 Height="35"
+                 FontSize="20"
+                 Margin="10 0">
+        </TextBox>
+        <CheckBox Grid.Row="7" Grid.Column="3"
+                  Name="answerCorrectness4"
+                  HorizontalAlignment="Center"
+                  VerticalAlignment="Center"
+                  Background="White">
+            <CheckBox.Resources>
+                <SolidColorBrush x:Key="MaterialDesignCheckBoxOff" Color="White"/>
+            </CheckBox.Resources>
+        </CheckBox>
+
+        <Button x:Name="saveQuestionButton" 
+                Grid.Row="8" Grid.ColumnSpan="3" 
+                Height="40"
+                Width="200"
+                VerticalAlignment="Center"
+                HorizontalAlignment="Center"
+                Background="#4d787878"
+                BorderBrush="#99FFFFFF"
+                FontSize="18"
+                Content="Сохранить" 
+                Foreground="White" Click="saveQuestionButton_Click"/>
+    </Grid>
+</Window>
